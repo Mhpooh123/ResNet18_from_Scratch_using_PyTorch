@@ -1,7 +1,15 @@
 import torchvision.models as models
 import torch.nn as nn
 
-
+#โมเดลสำเร็จรูป ResNet18 จาก torchvision
+#สามารถเลือกโหลด weight ที่ฝึกมาแล้วหรือไม่ก็ได้
+#สามารถเลือก fine-tune หรือไม่ก็ได้
+#num_classes คือจำนวนคลาสที่ต้องการจำแนก
+#หากต้องการใช้โมเดลนี้ในงานอื่นๆ ควรตั้งค่า
+#pretrained=False และ fine_tune=False เพื่อไม่ให้โหลด weight ที่ฝึกมาแล้ว
+#และไม่ให้ปรับแต่ง weight ของเลเยอร์ที่ซ่อนอยู่
+#หากต้องการใช้โมเดลนี้ในงานจำแนกภาพ ควร
+#ตั้งค่า pretrained=True และ fine_tune=True เพื่อใช้ weight ที่ฝึกมาแล้ว      
 def build_model(pretrained=True, fine_tune=True, num_classes=1):
     if pretrained:
         print("[INFO]: Loading pre-trained weights")

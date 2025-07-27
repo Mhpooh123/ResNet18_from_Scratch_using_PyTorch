@@ -4,7 +4,14 @@ This does not build generalized blocks for all ResNets, just for ResNet18.
 Paper => Deep Residual Learning for Image Recognition.
 Link => https://arxiv.org/pdf/1512.03385v1.pdf
 """
-
+# โมเดล ResNet18 จาก PyTorch
+# ใช้โมเดลนี้เพื่อเรียนรู้การสร้างโมเดล ResNet18 ด้วย PyTorch
+# และเข้าใจโครงสร้างของโมเดล ResNet18
+# โมเดลนี้ไม่ใช่โมเดลที่สร้างจาก torchvision.models.resnet18
+# แต่เป็นโมเดลที่สร้างขึ้นเองจากพื้นฐาน
+# เพื่อให้เข้าใจการทำงานของโมเดล ResNet18 ได้ดียิ่งขึ้น
+# โมเดลนี้ใช้ BasicBlock เป็นบล็อกหลักในการสร้างโมเดล
+# และใช้ nn.Module เป็นคลาสหลักในการสร้างโมเดล  
 import torch.nn as nn
 import torch
 
@@ -69,7 +76,7 @@ class ResNet(nn.Module):
         img_channels: int,
         num_layers: int,
         block: Type[BasicBlock],
-        num_classes: int = 1000,
+        num_classes: int = 2,
     ) -> None:
         super(ResNet, self).__init__()
         if num_layers == 18:

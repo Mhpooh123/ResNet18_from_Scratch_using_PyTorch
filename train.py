@@ -35,18 +35,23 @@ batch_size = 64
 learning_rate = 0.01
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-train_loader, valid_loader = get_data(batch_size=batch_size)
+#ดึง data loader จาก utils.py
+train_loader, valid_loader = get_data(batch_size=64)
+#train_loader, valid_loader = get_data(batch_size=batch_size)
 
 # Define model based on the argument parser string.
+# คำสั่ง Train ใน Terminal python train.py -m scratch เรียกใช้โมเดลนี้
 if args["model"] == "scratch":
     print("[INFO]: Training ResNet18 built from scratch...")
-    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=10).to(
+    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=2).to(
         device
     )
     plot_name = "resnet_scratch"
+
+# คำสั่งใน terminal python train.py -m torchvision เรียกใช้โมเดลนี้
 if args["model"] == "torchvision":
     print("[INFO]: Training the Torchvision ResNet18 model...")
-    model = build_model(pretrained=False, fine_tune=True, num_classes=10).to(device)
+    model = build_model(pretrained=False, fine_tune=True, num_classes=2).to(device)
     plot_name = "resnet_torchvision"
 print(model)
 

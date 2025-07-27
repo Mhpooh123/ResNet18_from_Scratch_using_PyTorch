@@ -2,32 +2,35 @@ import matplotlib.pyplot as plt
 import os
 
 from torch.utils.data import DataLoader
-from torchvision import datasets
-from torchvision.transforms import ToTensor
+from torchvision import datasets , transforms
+from torchvision.transforms import ToTensor,Compose, Resize
+from torchvision.datasets import ImageFolder
 
 plt.style.use("ggplot")
 
 
 def get_data(batch_size=64):
-    # CIFAR10 training dataset.
-    dataset_train = datasets.CIFAR10(
-        root="data",
-        train=True,
-        download=True,
-        transform=ToTensor(),
+    # Transforms (คุณจะเพิ่ม augment ได้ในภายหลัง)
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),  # เพราะ ResNet18 ต้องใช้ input 224x224
+        transforms.ToTensor(),
+    ])
+
+    # Load custom training and validation datasets
+    dataset_train = datasets.ImageFolder(
+        root="training_set300", #  เปลี่ยนเป็น path ของ training set ของคุณ
+        transform=transform
     )
 
-    # CIFAR10 validation dataset.
-    dataset_valid = datasets.CIFAR10(
-        root="data",
-        train=False,
-        download=True,
-        transform=ToTensor(),
+    dataset_valid = datasets.ImageFolder(
+        root="testing_set100",# เปลี่ยนเป็น path ของ validation set ของคุณ
+        transform=transform
     )
 
     # Create data loaders.
     train_loader = DataLoader(dataset_train, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset_valid, batch_size=batch_size, shuffle=False)
+
     return train_loader, valid_loader
 
 
