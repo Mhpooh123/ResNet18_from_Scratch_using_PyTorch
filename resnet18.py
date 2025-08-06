@@ -69,14 +69,14 @@ class BasicBlock(nn.Module):
         out = self.relu(out)
         return out
 
-
+# model ResNet18
 class ResNet(nn.Module):
     def __init__(
         self,
         img_channels: int,
         num_layers: int,
         block: Type[BasicBlock],
-        num_classes: int = 2,
+        num_classes: int = 6,# Change num_classes as per your dataset
     ) -> None:
         super(ResNet, self).__init__()
         if num_layers == 18:
@@ -163,7 +163,7 @@ class ResNet(nn.Module):
 
 if __name__ == "__main__":
     tensor = torch.rand([1, 3, 224, 224])
-    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=1000)
+    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=6) # Change num_classes as per your dataset
     print(model)
 
     # Total parameters and trainable parameters.

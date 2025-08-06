@@ -30,8 +30,8 @@ np.random.seed(seed)
 random.seed(seed)
 
 # Learning and training parameters.
-epochs = 20
-batch_size = 64
+epochs = 15
+batch_size = 30
 learning_rate = 0.01
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -40,10 +40,11 @@ train_loader, valid_loader = get_data(batch_size=64)
 #train_loader, valid_loader = get_data(batch_size=batch_size)
 
 # Define model based on the argument parser string.
-# คำสั่ง Train ใน Terminal python train.py -m scratch เรียกใช้โมเดลนี้
+# คำสั่ง Train ใน Terminal python train.py -m scratch เรียกใช้โมเดลนี้ กดไฟล์รันตามลำดับ utils training_utils resnet18 train
+
 if args["model"] == "scratch":
     print("[INFO]: Training ResNet18 built from scratch...")
-    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=2).to(
+    model = ResNet(img_channels=3, num_layers=18, block=BasicBlock, num_classes=6).to(
         device
     )
     plot_name = "resnet_scratch"

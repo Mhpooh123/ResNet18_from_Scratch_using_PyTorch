@@ -18,12 +18,12 @@ def get_data(batch_size=64):
 
     # Load custom training and validation datasets
     dataset_train = datasets.ImageFolder(
-        root="training_set300", #  เปลี่ยนเป็น path ของ training set ของคุณ
+        root="D:\Github\ResNet18_from_Scratch_using_PyTorchblobmainutils.py\ResNet18_from_Scratch_using_PyTorch\data\Training", #  เปลี่ยนเป็น path ของ training set ของคุณ
         transform=transform
     )
 
     dataset_valid = datasets.ImageFolder(
-        root="testing_set100",# เปลี่ยนเป็น path ของ validation set ของคุณ
+        root="D:\Github\ResNet18_from_Scratch_using_PyTorchblobmainutils.py\ResNet18_from_Scratch_using_PyTorch\data\TestIng",# เปลี่ยนเป็น path ของ validation set ของคุณ
         transform=transform
     )
 
@@ -55,3 +55,5 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss, name=None):
     plt.ylabel("Loss")
     plt.legend()
     plt.savefig(os.path.join("outputs", name + "_loss.png"))
+
+# เหลือพอตเเสดงกราฟ
